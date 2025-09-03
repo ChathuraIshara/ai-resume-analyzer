@@ -2,8 +2,20 @@ import type { Route } from "./+types/home";
 import Navbar from "~/components/Navbar";
 import ResumeCard from "~/components/ResumeCard";
 import { resumes } from "~/constants";
+import { usePuterStore } from "~/lib/puter";
+import { useNavigate } from "react-router";
+import { type NavigateFunction } from "react-router";
+import { useEffect } from "react";
 
 export function meta({}: Route.MetaArgs) {
+   const {  auth } = usePuterStore();
+    const navigate:NavigateFunction = useNavigate();
+ 
+    useEffect(() => {
+        if (!auth.isAuthenticated) {
+            navigate('/auth?next=/');
+        }
+    }, [auth.isAuthenticated]);
   return [
     { title: "Resumind" },
     { name: "description", content: "Smart feedback for your dream job!" },
@@ -15,7 +27,7 @@ export default function Home() {
     <main className="bg-[url('/images/bg-main.svg')] bg-cover">
       <Navbar />
       <section className="main-section">
-        <div className="page-heading">
+        <div className="page-heading py-16">
           <h1>Track your Appliactions & Resume Ratings</h1>
           <h2>Review Your submissions and check AI-powered feedback.</h2>
         </div>
