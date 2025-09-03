@@ -15,7 +15,6 @@ const auth = () => {
     const navigate:NavigateFunction = useNavigate();
  
     useEffect(() => {
-        console.log('next',next);
         if (auth.isAuthenticated) {
             navigate(next);
         }

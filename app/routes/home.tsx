@@ -8,6 +8,13 @@ import { type NavigateFunction } from "react-router";
 import { useEffect } from "react";
 
 export function meta({}: Route.MetaArgs) {
+  return [
+    { title: "Resumind" },
+    { name: "description", content: "Smart feedback for your dream job!" },
+  ];
+}
+
+export default function Home() {
    const {  auth } = usePuterStore();
     const navigate:NavigateFunction = useNavigate();
  
@@ -16,13 +23,6 @@ export function meta({}: Route.MetaArgs) {
             navigate('/auth?next=/');
         }
     }, [auth.isAuthenticated]);
-  return [
-    { title: "Resumind" },
-    { name: "description", content: "Smart feedback for your dream job!" },
-  ];
-}
-
-export default function Home() {
   return (
     <main className="bg-[url('/images/bg-main.svg')] bg-cover">
       <Navbar />
