@@ -5,6 +5,7 @@ import FileUploader from "~/components/FileUploader";
 import { usePuterStore } from "~/lib/puter";
 import { convertPdfToImage } from "~/lib/pdfToImage";
 import { prepareInstructions } from "~/constants";
+import { useNavigate } from "react-router";
 
 const Upload = () => {
   const [isProcessing, setIsProcessing] = useState(false);
@@ -12,6 +13,7 @@ const Upload = () => {
   const [file, setFile] = useState<File | null>(null);
 
   const { isLoading, auth, fs, ai, kv } = usePuterStore();
+  const navigate = useNavigate();
 
   const handleAnalysze = async ({
     companyName,
@@ -68,6 +70,7 @@ const Upload = () => {
     await kv.set(`resume:${uuid}`, JSON.stringify(data));
     setStatusText("Analysis complete! Redirecting...");
     console.log(data);
+    navigate(`/resume/${uuid}`)
   };
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
