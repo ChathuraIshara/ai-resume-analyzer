@@ -1,19 +1,26 @@
 import React from "react";
 import ScoreGauge from "./ScoreGauge";
+import ScoreBadge from "./ScoreBadge";
 
 const Category = ({ title, score }: { title: string; score: number }) => {
-    const textColor = score>70 ? 'text-green-600': score>49 ?'text-yellow-600' :'text-red-600';
-  return(
-  <div className="resume-summary">
-    <div className="category">
-        <div className="flex flex-row items-center justify-center gap-2">
-            <p>{title}</p>
+  const textColor =
+    score > 70
+      ? "text-green-600"
+      : score > 49
+        ? "text-yellow-600"
+        : "text-red-600";
+  return (
+    <div className="resume-summary">
+      <div className="category">
+        <div className="flex gap-2 items-center justify-center">
+          <p>{title}</p>
+          <ScoreBadge score={score} />
         </div>
         <p className="text-2xl">
-            <span className={textColor}>{score}</span>/100
+          <span className={textColor}>{score}</span>/100
         </p>
+      </div>
     </div>
-  </div>
   );
 };
 
